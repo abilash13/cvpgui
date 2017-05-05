@@ -1,0 +1,224 @@
+<div class="splash">
+    <div class="splash-header-container">
+        <div class="splash-header">
+        	<span class="splash-title">{{containerConfigCtrl.name}}
+</span>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" type="text/css" href="assets/css/form.css"/>
+	
+	<div id="tabs" class="topology-content page-dimensions">
+         <ul class="nav nav-tabs" role="tablist">
+            <li ng-class="{'active' : containerConfigCtrl.tab === 'banner'}">
+                <a href ng-click="containerConfigCtrl.setTab('banner')">Banner</a>
+            </li>
+            <li ng-class="{'active' : containerConfigCtrl.tab === 'admin'}">
+                <a href ng-click="containerConfigCtrl.setTab('admin')">Administration</a>
+            </li>
+         </ul>
+
+         <div class="tab-content" ng-show="containerConfigCtrl.tab === 'banner'">
+         	<section class="tab-pane table-data">
+ 				<div class="builder-tabview tabs-left clearfix">
+				<ul class="sub-nav sub-nav-tabs" role="tablist" set-builder-tab-height="" style="height: 1000px; ">
+					<li ng-class="{'active' : containerConfigCtrl.subTab === 'login'}">
+						<div ng-click="containerConfigCtrl.setSubTab('login')">Login</div>
+					</li>
+					<li ng-class="{'active' : containerConfigCtrl.subTab === 'motd'}">
+						<div ng-click="containerConfigCtrl.setSubTab('motd')">Motd</div>
+					</li>
+				</ul>
+				</div>
+         	</section>
+         	<div class="center-wrapper" ng-show="containerConfigCtrl.subTab === 'login'">
+         		<div class="center-content">
+	         		<form name="loginBannerForm" ng-submit="containerConfigCtrl.pushConfig('loginBanner')">
+		       			<fieldset>
+	         			<legend class="legend"><h2>Login Banner</h2></legend>
+	         			<h4>Enter the message to be displayed before login and password prompts</h4>
+
+		       			<textarea class="banner" rows="15" cols="60" ng-model="containerConfigCtrl.loginBanner">	       			
+						</textarea>
+						</fieldset>
+						<input type="submit" name="Save" class="save-butn" value="Save">
+					</form>  
+				</div>		
+         	</div>
+          <div class="center-wrapper" ng-show="containerConfigCtrl.subTab === 'motd'">
+         		<div class="center-content">
+	         		<form name="motdBannerForm" ng-submit="containerConfigCtrl.pushConfig('motdBanner')">
+		       			<fieldset>
+	         			<legend class="legend"><h2>Motd Banner</h2></legend>
+	         			<h4>Enter the "message of the day" to be displayed after login</h4>
+		       			<textarea class="banner" rows="15" cols="60" ng-model="containerConfigCtrl.motdBanner">
+						</textarea>
+						</fieldset>
+						<input type="submit" name="Save" class="save-butn" value="Save">
+					</form>  
+				</div>		
+         	</div>
+         </div>
+                    	
+
+           <div class="tab-content" ng-show="containerConfigCtrl.tab === 'admin'">
+	         	<section class="tab-pane table-data">
+	                <div class="builder-tabview tabs-left clearfix">
+	                <ul class="sub-nav sub-nav-tabs" role="tablist" set-builder-tab-height="" style="height: 1000px; ">
+	                    <li ng-class="{'active' : containerConfigCtrl.subTab === 'username'}">
+	                        <div ng-click="containerConfigCtrl.setSubTab('username')">Username </div>
+	                    </li>
+	                     <li ng-class="{'active' : containerConfigCtrl.subTab === 'time'}">
+	                        <div ng-click="containerConfigCtrl.setSubTab('time')">Time Configuration</div>
+	                   
+	                    </li>
+	                </ul>
+	                </div>
+	            </section>
+
+		         	<div class="center-wrapper" ng-show="containerConfigCtrl.subTab === 'time'">
+		                <div class="center-content">
+		                    <form name="timeForm" ng-submit="containerConfigCtrl.pushConfig('time')">
+		                    	<fieldset>
+		                    		<legend class="legend"><h2>Device Time Configuration</h2></legend>
+		                    			<fieldset >
+		                    				<legend class="legend"><h3>Device Clock Configuration</h3></legend>
+
+		                    				<table cellpadding="4%">
+		                    					<tr>
+		                    						<td>
+		                    						<div class="command buttongroup"><h4 class="command_label">Time Configuration:</h4> </div>
+		                    						</td>
+
+		                    						<td>
+		                    							<input class ="radio_input" type="radio" name="mode" value="manual"  ng-model="containerConfigCtrl.timeMode" >
+			                                       		 <h4 class="radio-label">Manual</h4>
+		                    						</td>
+
+		                    						<td>
+		                    							<input class ="radio_input" type="radio" name="mode" value="timezone"  ng-model="containerConfigCtrl.timeMode" >
+			                                        	<h4 class="radio-label">Timezone</h4>
+		                    						</td>
+
+		                    						<td>
+		                    							<input class ="radio_input" type="radio" name="mode" value="ntp"  ng-model="containerConfigCtrl.timeMode" >
+			                                        	<h4 class="radio-label">NTP</h4>
+		                    						</td>
+
+		                    					</tr>
+		                    				</table>
+
+			                                <div ng-show="containerConfigCtrl.timeMode == 'manual'">
+			                                	<div class="command"><h4 class="command_label">Set time:</h4> <input class ="form_input" type="time" step="1" ng-model="containerConfigCtrl.timeClockTime"></div>
+				                            	<div class="command"><h4 class="command_label">Set Date:</h4> <input class ="form_input" type="date"  ng-model="containerConfigCtrl.timeClockDate" ></div>
+				                            </div>
+
+				                            
+				                             <div class="command" ng-show="containerConfigCtrl.timeMode == 'timezone'"><h4 class="command_label">Timezone:</h4> 
+				                             	<select name="timezone" ng-model="containerConfigCtrl.timeClockTimezone">
+		                                                    <option value="US">US</option>
+		                                                    <option value="Pacific">Pacific</option>
+		                                        </select>
+				                             </div>
+
+				                             <div ng-show="containerConfigCtrl.timeMode == 'ntp'">
+				                             	<div class="command" ><h4 class="command_label">Server:</h4> <input class ="form_input" ng-model="containerConfigCtrl.timeNTPServer"></div>
+
+				                            <div class="command"><h4 class="command_label">Source:</h4>
+				                            <select name="interface" ng-model="containerConfigCtrl.timeClockInterface">
+		                                                    <option value="Ethernet">Ethernet</option>
+		                                                    <option value="Loopback">Loopback</option>
+		                                                    <option value="Management">Management</option>
+		                                                    <option value="Port-Channel">Port-Channel</option>
+		                                                    <option value="Tunnel">Tunnel</option>
+		                                                    <option value="VLAN">VLAN</option>
+		                                                    <option value="VRF">VRF</option>
+		                                     </select> 
+
+				                            <input class ="form_input" type="number" ng-model="containerConfigCtrl.timeNTPSource"></div>
+				                             </div> 
+
+		                            	</fieldset>
+		                        </fieldset>
+		                        <input type="submit" name="Save" class="save-butn" value="Save">
+		           			</form>
+		           		</div>
+		           	</div>
+
+		           	<div class="center-wrapper" ng-show="containerConfigCtrl.subTab === 'username'">
+		                <div class="center-content">
+		                    <form name="timeForm" ng-submit="containerConfigCtrl.pushConfig('username')">
+		                    	<fieldset width="50%">
+		                    		<legend class="legend"><h2>Username Configurations</h2></legend>
+
+		                    		<table>
+		                    			<tr>
+			                    			<td>
+			                    				<div class="command"><h4 class="command_label">Number of usernames:</h4></div>
+			                    			</td>
+			                    			<td>
+			                    				<input type="number" min ="0" class ="form_input" ng-model="containerConfigCtrl.usernameNum" required>
+			                    			</td>
+		                    			</tr>
+		                    		</table>
+									
+										<div >
+											<table ng-show="containerConfigCtrl.usernameNum" align="center" cellpadding="4%">
+
+												<tr >
+
+														<table ng-repeat="i in containerConfigCtrl.getNumber(containerConfigCtrl.usernameNum)" align="center" cellpadding="4%" frame="box">
+															<tr>
+																<td><h4 class="command_label">Username:</h4></td>
+
+																<td><input class ="form_input" ng-model="containerConfigCtrl.username[i].username" required>
+																</td>
+
+																<td><h4 class="command_label">Privilege:</h4></td>
+
+																<td><input class ="form_input" type="number" min="0" max="15" ng-model="containerConfigCtrl.username[i].privilige">
+																</td>
+															</tr>
+															<tr>
+																<td><div class="options" align="right"><input class ="radio_input " type="checkbox" ng-model="containerConfigCtrl.username[i].nopassword" ng-checked="true" ng-init="containerConfigCtrl.username[i].nopassword = true"></div></td>
+                                           						 <td><h4 class="radio-label">No Password</h4></td>
+                                           					</tr>
+                                           					<tr ng-hide="containerConfigCtrl.username[i].nopassword">
+                                           						<td><h4 class="command_label">Password:</h4></td>
+
+																<td ><input class ="form_input"  ng-model="containerConfigCtrl.username[i].password" required>
+																</td>
+
+																<td><h4 class="command_label">Encryption:</h4></td>
+
+																<td >
+																	<select name="direction" ng-model="containerConfigCtrl.username[i].passwordEncryption" ng-init="containerConfigCtrl.username[i].passwordEncryption = 'clear'">
+					                                                    <option value="clear">Clear-Text</option>
+					                                                    <option value="md5">md5</option>
+					                                                    <option value="sha512">sha512</option>
+					                                                </select>
+																</td>
+
+															</tr>
+															<tr>
+																<td><h4 class="command_label">Role:</h4></td>
+																<td>
+																	<input class ="form_input"  ng-model="containerConfigCtrl.username[i].role" required>
+																</td>
+																</td>
+															</tr>
+														</table>
+
+												</tr>
+
+											</table>
+										</div>
+
+		                    	</fieldset>
+		                    <input type="submit" name="Save" class="save-butn" value="Save">
+		                    </form>
+		                </div>
+		            </div>
+           </div>
+    </div>

@@ -1,0 +1,458 @@
+a {
+    background: transparent;
+}
+
+a, a:hover, a:focus {
+    outline: none;
+    text-decoration: none;
+}
+
+.nav>li>a {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+}
+
+.nav-tabs>li>a {
+    margin-right: 2px;
+    line-height: 1.42857143;
+    border: 1px solid transparent;
+    border-radius: 4px 4px 0 0;
+}
+
+.nav-tabs>li>a, .nav-tabs>li>div {
+    border: 1px solid;
+    border-left: none;
+    border-radius: 0;
+    margin-right: 0;
+    font-size: 15px;
+    padding: 4px 9px;
+    cursor: pointer;
+}
+
+.nav-tabs>li>a, .nav-tabs>li>div {
+    border-color: #d4d4d4;
+    color: #777;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
+    color: #555555;
+    cursor: default;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-bottom-color: transparent;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover {
+    cursor: pointer;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>div, .nav-tabs>li.active>div:hover, .nav-tabs>li.active>div:focus {
+    border-left: none;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>div, .nav-tabs>li.active>div:hover, .nav-tabs>li.active>div:focus {
+    color: #fff;
+    background: #2862a8;
+}
+
+#tabs ul.nav-tabs>li>a, #tabs ul.nav-tabs>li>div, #tabs ul.nav-tabs>li>a:hover, #tabs ul.nav-tabs>li>div:hover {
+    border-bottom: 0;
+}
+
+ul, li {
+    text-decoration: none;
+    list-style: none;
+    padding: 2px;
+}
+
+ul, li {
+    color: #666;
+}
+
+.nav>li {
+    position: relative;
+    display: block;
+}
+
+.nav-tabs>li {
+    float: left;
+    margin-bottom: -1px;
+}
+
+#tabs .nav-tabs li {
+    padding: 0;
+}
+
+#tabs .nav-tabs>li {
+    padding: 0 0 1px 0;
+    margin-bottom: -3px;
+}
+
+ul, ol {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+ul, li {
+    text-decoration: none;
+    list-style: none;
+    padding: 2px;
+}
+
+ul, li {
+    color: #666;
+}
+
+.nav {
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+
+.nav-tabs {
+    border-bottom: 1px solid #dddddd;
+    overflow: auto;
+}
+
+
+.nav-tabs {
+    border-left: 1px solid;
+}
+
+.nav-tabs {
+    border-left-color: #d4d4d4;
+    border-bottom-color: #2862a8;
+}
+
+#tabs ul {
+    padding: 0 0 2px;
+}
+
+#tabs .nav-tabs {
+    border-width: 0 0 8px 1px;
+    border-style: solid;
+}
+
+.tab-content {
+    border: 1px solid;
+    margin-top: -4px;
+}
+
+.tab-content {
+    border-color: #d4d4d4;
+}
+
+#label-manage .topology-content {
+    background: none repeat scroll 0 0 rgba(0,0,0,0);
+    border: medium none;
+    margin: 4px 10px 10px;
+    width: auto;
+}
+
+#inventory-manage .topology-content, .page-dimensions.topology-content {
+    width: auto;
+    border: none;
+    margin: 4px 10px 10px 10px;
+}
+
+.topology-content {
+    border-color: #d4d4d4;
+    background: #fff;
+}
+
+.topology-content {
+    width: 95%;
+    border: 1px solid;
+    margin: 5px 10px 10px 0;
+    position: relative;
+}
+
+
+.sub-nav-tabs>li>a, .sub-nav-tabs>li>div {
+    border: 1px solid;
+    border-left: none;
+    border-radius: 0;
+    margin-right: 0;
+    font-size: 15px;
+    padding: 4px 9px;
+    cursor: pointer;
+}
+
+.sub-nav-tabs>li>a, .sub-nav-tabs>li>div {
+    border-color: #d4d4d4;
+    color: #777;
+}
+
+.sub-nav-tabs>li.active>a, .sub-nav-tabs>li.active>a:hover, .sub-nav-tabs>li.active>a:focus, .sub-nav-tabs>li.active>div, .sub-nav-tabs>li.active>div:hover, .sub-nav-tabs>li.active>div:focus {
+    border-left: none;
+}
+
+.sub-nav-tabs>li.active>a, .sub-nav-tabs>li.active>a:hover, .sub-nav-tabs>li.active>a:focus, .sub-nav-tabs>li.active>div, .sub-nav-tabs>li.active>div:hover, .sub-nav-tabs>li.active>div:focus {
+    color: #fff;
+    background: #2862a8;
+}
+
+.sub-nav-tabs>li.active>div {
+    cursor: default;
+}
+
+#tabs ul.sub-nav-tabs>li>a, #tabs ul.sub-nav-tabs>li>div, #tabs ul.sub-nav-tabs>li>a:hover, #tabs ul.sub-nav-tabs>li>div:hover {
+    border-bottom: 0;
+}
+
+#tabs .tabs-left .sub-nav-tabs li div {
+    border: none;
+    line-height: 37px;
+    text-align: center;
+    padding: 4px 0;
+    font-size: 14px;
+}
+
+.sub-nav>li {
+    position: relative;
+    display: block;
+}
+
+.sub-nav-tabs>li {
+    float: left;
+    margin-bottom: -1px;
+}
+
+#tabs .sub-nav-tabs li {
+    padding: 0;
+}
+
+#tabs .sub-nav-tabs>li {
+    padding: 0 0 1px 0;
+    margin-bottom: -3px;
+}
+
+#tabs .tabs-left .sub-nav-tabs li {
+    margin-bottom: 0;
+    padding: 0;
+    width: 100%;
+    border-bottom: 1px solid;
+}
+
+#tabs .tabs-left .sub-nav-tabs li {
+    border-bottom-color: #dbdbdb;
+    background: #fff;
+}
+
+.sub-nav {
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+
+.sub-nav-tabs {
+    border-bottom: 1px solid #dddddd;
+}
+
+.sub-nav-tabs {
+    border-left: 1px solid;
+}
+
+.sub-nav-tabs {
+    border-left-color: #d4d4d4;
+    border-bottom-color: #2862a8;
+}
+
+#tabs .sub-nav-tabs {
+    border-width: 0 0 8px 1px;
+    border-style: solid;
+}
+
+#tabs .tabs-left .sub-nav-tabs {
+    width: 9.5%;
+    float: left;
+    min-height: 473px;
+    border-width: 0 5px 0 0;
+    vertical-align: top;
+}
+
+#tabs .tabs-left .sub-nav-tabs {
+    border-color: #2862a8;
+    background: #F1F1F1;
+}
+
+/*validate*/
+
+.validate-proposed-config {
+    border-color: #dbdbdb;
+}
+
+.proposed-config, .validate-proposed-config {
+    border-left-color: #dbdbdb;
+    color: #333;
+}
+
+.validate-proposed-config {
+    width: 33.3%;
+    border: 1px solid;
+    border-bottom: none;
+    /* position: relative; */
+}
+
+.proposed-config, .validate-proposed-config {
+    width: 40%;
+    float: left;
+    border-left: 1px solid;
+}
+
+/*h1*/
+
+.validate-proposed-config .script-title {
+    line-height: 32px;
+    padding: 0 10px;
+}
+
+.proposed-config h1, .validate-proposed-config h1 {
+    background: #001733;
+    color: #fff;
+}
+
+.proposed-config h1, .validate-proposed-config h1 {
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 14px;
+    padding: 5px 10px;
+}
+
+input, textarea {
+    border-color: #d4d4d4;
+    background: #fff;
+}
+
+input, textarea {
+    border-radius: none;
+    border: 1px solid;
+    padding: 3px 5px;
+    font-size: 13px;
+}
+
+input, button, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+textarea {
+    overflow: auto;
+    vertical-align: top;
+}
+
+button, input, select, textarea {
+    margin: 0;
+    font-family: inherit;
+    font-size: 100%;
+}
+
+.tab-content {
+    position: relative;
+}
+
+.tab-content .center-wrapper {
+    position: absolute;
+    left: 50%;
+}
+
+.tab-content .center-wrapper .center-content {
+    position: relative;
+    left: -50%;
+    margin-top: 10%;
+}
+
+h2,h4{
+    color: #666;
+    text-align: center;
+    margin-bottom: 3%;
+}
+
+input[type="submit"] {
+    cursor: pointer;
+}
+
+
+
+.save-butn:hover, .cancel-butn:hover {
+    color: #fff;
+}
+
+.save-butn:hover {
+    background: #286600;
+    color: #fff;
+}
+
+.save-butn {
+    color: #fff;
+    background: #48b800;redistribute
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    display: inline-block;
+    margin-top: 3%;
+    margin-left: 45%;
+}
+
+.form_input {
+    float: left;
+    margin-left: 1%;
+}
+
+.command {
+    padding-right: 4%;
+    margin-bottom: 1%;
+    float:left;
+    min-width:70%;
+}
+
+
+.config_field {
+    width: 105%
+}
+
+
+fieldset {
+    text-align: center;
+}
+
+.radio-label{
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 3%;
+}
+
+.command.buttongroup {
+    float: none;
+    margin-top: 9%;
+}
+
+.radio-label{
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 3%;
+}
+
+.command_label {
+    float: left;
+    
+}
+
+input[type="checkbox"], input[type="radio"] {
+    box-sizing: border-box;
+    padding: 0;
+    margin-left: .5%;
+}
+
+input[type="submit"] {
+    background: #2862a8;
+    color: #fff;
+}
+
+table {
+    margin-bottom: 2%;
+    border-collapse: separate;
+    border-spacing: 1% 5%;
+}

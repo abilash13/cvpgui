@@ -1,0 +1,63 @@
+<link rel="stylesheet" type="text/css" href="assets/css/add.css"/>
+
+<div class="splash">
+    <div class="splash-header-container">
+        <div class="splash-header">
+            <span class="splash-title">Devices</span>
+            <div class="splash-description">
+                Select a device to enter configurations
+            </div>
+        </div>
+        <div class="input-container splash-input-container input-group" >
+            <span class="input-group-addon">
+                <span class="search-button glyphicon glyphicon-search"></span>
+            </span>
+            <input type="text" class="form-control" placeholder="Device name or ID" value="" ng-model="searchString">
+            <span class="input-group-addon add-devices" ng-click="deviceCtrl.toggleMenu()">
+                <span class="add-button glyphicon glyphicon-plus"></span>
+            </span>   
+                <div class="menu-box lefttop_Menu" id="device-menu" style="display: block; position: absolute; left: 450px; top: 1px;" ng-show="deviceCtrl.toggle">
+                    <form name="addDeviceMenu" novalidate ng-submit="addDeviceMenu.$valid && deviceCtrl.addDevice()">
+                        <ul>           
+                            <li id="add-device-title">Add Device</li>
+                            <li id="device-name">
+                                 <input class="placeholder-color" type="text" name="name" title="Device Name" placeholder="Device Name" ng-model="deviceCtrl.name" required>
+                            </li>
+                            <li id="serial-number">
+                                 <input class="placeholder-color" type="text" name="serialNo" title="Device Serial Number" placeholder="Serial Number" ng-model="deviceCtrl.serialNo"  required>
+                            </li>
+                            <li id="container-name">
+                                 <input class="placeholder-color" type="text" name="name" title="Container Name" placeholder="Container Name" ng-model="deviceCtrl.container" value="Undefined">
+                            </li>
+                            <li id="add-device">
+                                 <input class="add-device-button" type="submit" value="ADD" ng-disabled="addDeviceMenu.$invalid">
+                            </li>
+                        </ul>
+                    </form>
+                </div>    
+        </div>
+    </div>
+    <div class="splash-tiles" ng-show="deviceCtrl.devices">
+        <div class="tile-layout splash-tile-layout">
+            <div class="media-obj media-obj-reverse splash-media-obj" ng-click="deviceCtrl.redirect(device.serialNo)" ng-repeat="device in deviceCtrl.devices | filter : searchString">
+                <div class="media-obj-figure">
+                    <div><img alt="{{device.name}} - {{device.serialNo}}" class="devices-splash-image" src="assets/img/7050SX-64.png" title="{{device.name}} - {{device.serialNo}}">
+                        <div style="display: none;">
+                            <span>
+                                <span class="device-image-model">7050SX-64</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="media-obj-body">
+                    <h4>{{device.name}}</h4>
+                    <p>{{device.serialNo}}</p>
+                    <p>{{device.container}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

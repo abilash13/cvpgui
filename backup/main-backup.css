@@ -1,0 +1,240 @@
+@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");
+
+body {
+margin: 0;
+font-family: Helvetica,sans-serif;
+}
+
+.header-navbar {
+display: flex;
+flex-direction: row;
+background-color: #3a6593;
+   height: 45px;
+   justify-content: space-between;
+}
+
+.header-navbar .nav-left {
+align-items: center;
+display: flex;
+height: 100%;
+}
+
+.header-navbar .nav-left .logo {
+height: 16px;
+   margin-left: 17px;
+   margin-right: 20px;
+}
+
+img {
+vertical-align: middle;
+border: 0;
+}
+
+.header-navbar .nav-link.active:not(:hover) {
+   background-color: #2c4c6e;
+}
+
+.header-navbar .nav-link:hover {
+   background-color: #335881;
+   color: #fff;
+}
+
+.header-navbar .nav-link.active {
+   color: #fff;
+}
+
+.header-navbar .nav-link {
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   color: #dbedff;
+   cursor: pointer;
+   font-size: 16px;
+   height: 100%;
+   padding-left: 20px;
+   padding-right: 20px;
+   text-decoration: none;
+}
+
+.devices-splash {
+margin-left: 100px;
+}
+
+.devices-splash-header {
+   margin-left: 7px;
+   margin-top: 12px;
+   min-width: 500px;
+}
+
+.devices-splash-header .devices-splash-title {
+   border-bottom: 3px solid #b7c3d0;
+   color: #80929f;
+   font-size: 36px;
+}
+
+.devices-splash-header .devices-splash-description {
+   font-size: 16px;
+   padding-bottom: 5px;
+   padding-top: 8px;
+}
+
+.devices-splash-input-container {
+    margin-bottom: 10px;
+    margin-left: 6px;
+    margin-top: 5px;
+    max-width: 448px;
+}
+
+.input-container {
+    position: relative;
+}
+
+.input-group {
+    position: relative;
+    display: table;
+    border-collapse: separate;
+}
+
+.input-group-addon:first-child {
+    border-right: 0;
+}
+
+.input-group-addon:first-child, .input-group-btn:first-child>.btn, .input-group-btn:first-child>.btn-group>.btn, .input-group-btn:first-child>.dropdown-toggle, .input-group-btn:last-child>.btn-group:not(:last-child)>.btn, .input-group-btn:last-child>.btn:not(:last-child):not(.dropdown-toggle), .input-group .form-control:first-child {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.input-group-addon {
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    color: #555;
+    text-align: center;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.input-group-addon, .input-group-btn {
+    width: 1%;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+.input-group-addon, .input-group-btn, .input-group .form-control {
+    display: table-cell;
+}
+
+.input-group-addon:last-child, .input-group-btn:first-child>.btn-group:not(:first-child)>.btn, .input-group-btn:first-child>.btn:not(:first-child), .input-group-btn:last-child>.btn, .input-group-btn:last-child>.btn-group>.btn, .input-group-btn:last-child>.dropdown-toggle, .input-group .form-control:last-child {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+}
+
+.input-group-addon, .input-group-btn, .input-group .form-control {
+    display: table-cell;
+}
+
+.input-group .form-control {
+    position: relative;
+    z-index: 2;
+    float: left;
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.form-control {
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.form-control, output {
+    display: block;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+}
+
+button, input, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+input {
+    line-height: normal;
+}
+
+button, input, optgroup, select, textarea {
+    color: inherit;
+    font: inherit;
+    margin: 0;
+}
+
+.glyphicon {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: Glyphicons Halflings;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.glyphicon-search:before {
+    content: "\E003";
+}
+
+.media-obj {
+    display: flex;
+    flex-direction: row;
+    padding: 10px 5px;
+}
+
+.devices-splash-media-obj {
+    background-color: #f0f2f4;
+    box-shadow: 0 1px 6px rgba(0,0,0,.2);
+    margin: 7px;
+    min-height: 90px;
+    padding: 20px;
+    width: 260px;
+}
+
+.media-obj.media-obj-reverse .media-obj-figure {
+    margin: 0 0 0 5px;
+    -ms-flex-order: 1;
+    order: 1;
+}
+
+.devices-splash-media-obj .media-obj-figure {
+    min-height: 50px;
+}
+
+.devices-splash-image {
+    max-height: 50px;
+    max-width: 120px;
+}
+
+.media-obj h4 {
+    font-size: 14px;
+    font-weight: 700;
+    margin: 0 0 5px;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 5px;
+    margin-left: 0px;
+}
+
+.media-obj p {
+    font-size: 13px;
+    margin: 0;
+}

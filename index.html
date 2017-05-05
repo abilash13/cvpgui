@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app="config-gui">
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="assets/css/main.css" />
+</head>
+
+<body>
+    <nav class="header-navbar" ng-if="userLoggedIn">
+        <div class="nav-left">
+        <img class="logo" src="assets/img/logo.png" alt="Arista logo">
+        <a class="nav-link" href="#!/devices">Devices</a>
+    	<a class="nav-link" href="#!/containers">Containers</a>
+    	<a class="nav-link" href="#!/logout">Logout</a>
+        </div>
+    </nav>
+
+    <div id="error" class="animateNotifications message">
+          <span class="icon glyphicon glyphicon-circle-arrow-down"></span>
+          <span class="errorMessage"></span>
+          <span class="close-message add-button glyphicon glyphicon-remove" "></span>
+    </div>
+
+    
+    <div ng-view></div>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular-route.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular-messages.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.8/angular-filter.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="routes.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+#label-manage .topology-content {
+    background: none repeat scroll 0 0 rgba(0,0,0,0);
+    border: medium none;
+    margin: 4px 10px 10px;
+    width: auto;
+}
+
+#tabs ul.nav-tabs>li>a, #tabs ul.nav-tabs>li>div, #tabs ul.nav-tabs>li>a:hover, #tabs ul.nav-tabs>li>div:hover {
+    border-bottom: 0;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>div, .nav-tabs>li.active>div:hover, .nav-tabs>li.active>div:focus {
+    color: #fff;
+    background: #2862a8;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>div, .nav-tabs>li.active>div:hover, .nav-tabs>li.active>div:focus {
+    border-left: none;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover {
+    cursor: pointer;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
+    color: #555555;
+    cursor: default;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-bottom-color: transparent;
+}
+
+.nav-tabs>li>a, .nav-tabs>li>div {
+    border-color: #d4d4d4;
+    color: #777;
+}
+
+
+.nav-tabs>li>a, .nav-tabs>li>div {
+    border: 1px solid;
+    border-left: none;
+    border-radius: 0;
+    margin-right: 0;
+    font-size: 15px;
+    padding: 4px 9px;
+    cursor: pointer;
+}
+
+.nav-tabs>li>a {
+    margin-right: 2px;
+    line-height: 1.42857143;
+    border: 1px solid transparent;
+    border-radius: 4px 4px 0 0;
+}
+
+.nav>li>a {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+}
+
+ul
+{
+    list-style-type: none;
+}
+
+li
+{
+    float: left;
+}
+
+a, a:hover, a:focus {
+    outline: none;
+    text-decoration: none;
+}

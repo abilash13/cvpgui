@@ -1,0 +1,254 @@
+#label-manage .topology-content {
+    background: none repeat scroll 0 0 rgba(0,0,0,0);
+    border: medium none;
+    margin: 4px 10px 10px;
+    width: auto;
+}
+
+.topology-content {
+    position: relative;
+}
+
+#tabs .nav-tabs {
+    border-width: 0 0 8px 1px;
+    border-style: solid;
+}
+
+    padding: 0 0 2px;
+}
+
+.nav-tabs {
+    border-left-color: #d4d4d4;
+    border-bottom-color: #2862a8;
+}
+
+
+.nav {
+    margin-bottom: 0;
+    list-style: none;
+}
+
+ul, li {
+    color: #666;
+}
+
+ul, li {
+    text-decoration: none;
+}
+
+ul, ol {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
+    display: block;
+}
+
+body, div[ng-view] {
+    min-height: 100vh;
+}
+
+.login-page {
+    background-image: url("../img/login-background.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-size: 0;
+    text-align: right;
+    position: relative;
+    min-height: 100vh;
+}
+
+div {
+    display: block;
+}
+
+.login-page .login-content {
+    width: 350px;
+    font-size: 13px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5%;
+    margin-top: 10%;
+}
+
+.login-logo {
+    background: url("../img/sprite.png") no-repeat;
+    width: 64px;
+    height: 64px;
+    background-position: -627px -274px;
+    height: 30px;
+    width: 175px;
+    margin: 0 25%;
+}
+
+div {
+    display: block;
+}
+
+/**/
+
+.login-page .login-box {
+    opacity: 1;
+    height: 420px;
+    margin-top: 15px;
+    text-align: center;
+}
+
+*, *:before, *:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/**/
+
+form {
+    display: block;
+    margin-top: 0em;
+}
+
+/**/
+
+.login-page .login-box h2 {
+    background: #00316c;
+    color: #fff;
+}
+
+.login-page .login-box h2 {
+    font-size: 20px;
+    padding: 16px 0;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 500;
+    line-height: 1.1;
+    color: inherit;
+}
+
+h2 {
+    display: block;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+/**/
+
+.login-page .login-fields {
+    background: #fff;
+}
+
+.login-page .login-fields {
+    padding: 30px 0;
+    position: relative;
+}
+
+.login-page .login-fields input {
+    background: #fff;
+    color: #333;
+    border-color: #c2c2c2;
+}
+
+.login-page .login-fields input {
+    width: 81%;
+    height: 38px;
+    padding: 8px;
+    line-height: 20px;
+    margin: 10px 0;
+    box-shadow: none;
+    border: 1px solid;
+}
+
+.main-content-wrap .placeholder-color {
+    font-size: 15px;
+}
+
+input, button, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+/**/
+
+.login-page .login-fields input[type='submit'] {
+    background-color: #00316c;
+    color: #fff;
+}
+
+.login-page .login-fields input[type='submit'] {
+    /*background: none repeat scroll 0 0;*/
+    border: none;
+    border-radius: 0;
+    font-size: 16px;
+    font-weight: 11px;
+    margin: 10px 29px;
+    padding: 10px 4px;
+    text-transform: uppercase;
+    width: 81%;
+}
+
+button, html input[type="button"], input[type="reset"], input[type="submit"] {
+    cursor: pointer;
+    -webkit-appearance: button;
+}
+
+input, button, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+input[type="button" i], input[type="submit" i], input[type="reset" i], input[type="file" i]::-webkit-file-upload-button, button {
+    align-items: flex-start;
+    text-align: center;
+    cursor: default;
+    color: buttontext;
+    background-color: buttonface;
+    box-sizing: border-box;
+    padding: 2px 6px 3px;
+    border-width: 2px;
+    border-style: outset;
+    border-color: buttonface;
+    border-image: initial;
+}
+
+input[type="button" i], input[type="submit" i], input[type="reset" i] {
+    -webkit-appearance: push-button;
+    user-select: none;
+    white-space: pre;
+}
+
+input, textarea, select, button {
+    text-rendering: auto;
+    color: initial;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    margin: 0em 0em 0em 0em;
+    font: 11px system-ui;
+}
+
+/**/
+
+/*.login-page .login-time {
+    padding: 19px;
+}
+
+.login-time {
+    background: #3a6dad;
+    color: #fff;
+}*/
+
+/**/
+
+

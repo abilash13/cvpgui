@@ -1,0 +1,58 @@
+<link rel="stylesheet" type="text/css" href="assets/css/add.css"/>
+
+<div class="splash">
+    <div class="splash-header-container">
+        <div class="splash-header">
+        	<span class="splash-title">Containers</span>
+            <div class="splash-description"><span>
+            	Select a container to enter configurations
+            </div>
+        </div>
+        <div class="input-container splash-input-container input-group">
+            <span class="input-group-addon">
+                <span class="search-button glyphicon glyphicon-search"></span>
+            </span>
+            <input type="text" class="form-control" placeholder="Container name " value="" ng-model="searchString">
+            <span class="input-group-addon add-containers" ng-click="containerCtrl.toggleMenu('addContainerMenu')">
+                <span class="add-button glyphicon glyphicon-plus"></span>
+            </span>
+             <div class="menu-box lefttop_Menu" id="container-menu" style="display: block; position: absolute; left: 450px; top: 1px;" ng-show="containerCtrl.toggle">
+                    <form name="addContainerMenu" novalidate ng-submit="addContainerMenu.$valid && containerCtrl.addContainer(addContainerMenu, containerCtrl.name)">
+                        <ul>           
+                            <li id="add-container-title">Add Container</li>
+                            <li id="container-name">
+                                <input class="placeholder-color" type="text" name="name" title="Container Name" placeholder="Container Name" ng-model="containerCtrl.name" required>
+                                <div ng-messages="addContainerMenu.name.$error">
+                                    <p class="form-error-message" ng-message="containerAlreadyExists">A container with that name already exists.</p>
+                                </div>
+                            </li>
+                            <li id="add-container">
+                                 <input class="add-container-button" type="submit" value="ADD" ng-disabled="addContainerMenu.$invalid">
+                            </li>
+                        </ul>
+                    </form>
+                </div>    
+        </div>
+        
+    
+    
+    <div class="splash-tiles" ng-show="containerCtrl.containers">
+        <div class="tile-layout splash-tile-layout">
+            <div class="media-obj media-obj-reverse splash-media-obj" ng-click="containerCtrl.redirect(container.name)" ng-repeat="container in containerCtrl.containers | filter : searchString">
+                <div class="media-obj-figure">
+                    <div><img alt="{{container.name}}" class="containers-splash-image" src="assets/img/container-hover.png" title="{{container.name}}">
+                        <div style="display: none;">
+                            <span>
+                                
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="media-obj-body">
+                    <h4>{{container.name}}</h4>
+                    <p>Device count : 0<!-- {{container.deviceCount}} --></p>
+                </div>
+            </div>
+        </div>
+    </div> 
+</div>

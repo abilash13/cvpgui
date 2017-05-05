@@ -1,0 +1,1020 @@
+<div class="splash">
+    <div class="splash-header-container">
+        <div class="splash-header">
+            <span class="splash-title">{{deviceConfigCtrl.serialNo}}</span>
+        </div>
+    </div>
+
+    <form name="hostnameForm" ng-submit="hostnameForm.$valid && deviceConfigCtrl.pushHostname()" novalidate>
+        <div class="input-container splash-input-container input-group">
+            <input ng-model="deviceConfigCtrl.hostname" type="text" class="form-control" placeholder="Hostname" required>
+            <span class="input-group-addon">
+                <input type="submit" name="hostname-submit" value="Submit" ng-disabled="hostnameForm.$invalid">
+            </span> 
+        </div>
+    </form>
+</div>
+
+
+<link rel="stylesheet" type="text/css" href="assets/css/form.css"/>
+
+
+    <div id="tabs" class="topology-content page-dimensions">
+         <ul class="nav nav-tabs" role="tablist">
+            <li ng-class="{'active' : deviceConfigCtrl.tab === 'routing'}">
+                <a href ng-click="deviceConfigCtrl.setTab('routing')">Routing</a>
+            </li>
+            <li ng-class="{'active' : deviceConfigCtrl.tab === 'vxlan'}">
+                <a href ng-click="deviceConfigCtrl.setTab('vxlan')">VXLAN</a>
+            </li>
+            <li ng-class="{'active' : deviceConfigCtrl.tab === 'interface'}">
+                <a href ng-click="deviceConfigCtrl.setTab('interface')">Interface</a>
+            </li>
+            <li ng-class="{'active' : deviceConfigCtrl.tab === 'routeMap'}">
+                <a href ng-click="deviceConfigCtrl.setTab('routeMap')">Route Map</a>
+            </li>
+         </ul>
+
+         <!-- Routing -->
+         <div class="tab-content" ng-show="deviceConfigCtrl.tab === 'routing'">
+            <section class="tab-pane table-data">
+                <div class="builder-tabview tabs-left clearfix">
+                <ul class="sub-nav sub-nav-tabs" role="tablist" set-builder-tab-height="" style="height: 1000px; ">
+                    <li ng-class="{'active' : deviceConfigCtrl.subTab === 'ospf'}">
+                        <div ng-click="deviceConfigCtrl.setSubTab('ospf')">OSPF</div>
+                    </li>
+                    <li ng-class="{'active' : deviceConfigCtrl.subTab === 'bgp'}">
+                        <div ng-click="deviceConfigCtrl.setSubTab('bgp')">BGP</div>
+                    </li>
+                </ul>
+                </div>
+            </section>
+
+            <!-- OSPF -->
+            <div class="center-wrapper" ng-show="deviceConfigCtrl.subTab === 'ospf'">
+                <div class="center-content">
+                    <form name="ospfConfigForm" ng-submit="deviceConfigCtrl.pushConfig('ospf')">
+                       <fieldset class="config_field">
+                            <legend class="legend"><h2>OSPF Configurations</h2></legend>
+                            <fieldset >
+
+                              <table cellpadding="4%" align="center">
+                                <tr>
+                                    <td>
+                                        <div class="command"><h4 class="command_label">Instance:</h4></div>
+                                    </td>
+                                    <td>
+                                        <input class ="form_input" type="number" min="1"  ng-model="deviceConfigCtrl.ospfInstance" value="1" required>
+                                    </td>
+                                    <td>
+                                        <div><input class ="radio_input" type="checkbox"   ng-model="deviceConfigCtrl.ospfShut" ></div>
+                                    </td>
+                                    <td>
+                                        <h4 class="radio-label">Shutdown</h4> 
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="command"><h4 class="command_label">Router Id:</h4></div>
+                                    </td>
+                                    <td>
+                                         <input class ="form_input" ng-model="deviceConfigCtrl.ospfRouterId" >
+                                    </td>
+                                </tr>
+                            </table>                  
+
+
+                            </fieldset>
+
+                            <fieldset >
+
+                                <legend class="legend"><h3>Networks</h3></legend>
+
+                                <table cellpadding="4%" align="center">
+                                    <tr>
+                                        <td>
+                                             <div class="command"><h4 class="command_label">Number of networks:</h4> </div>
+                                        </td>
+                                        <td>
+                                              <input type="number" min ="0" class ="form_input"   ng-model="deviceConfigCtrl.ospfNumNetworks" required>
+                                        </td>
+                                    </tr>
+                                </table>
+                                
+                             
+                                <table ng-show="deviceConfigCtrl.ospfNumNetworks" cellpadding="4%" align="center">
+
+                                <tr>
+                                    <th colspan="3">Network</th>
+                                    <th>Area</th>
+                                </tr>
+
+                                <tr ng-repeat="i in deviceConfigCtrl.getNumber(deviceConfigCtrl.ospfNumNetworks)" >
+                                    
+                                            <td><input class ="form_input" ng-model="deviceConfigCtrl.ospfNetwork[i].network" required></td>
+
+                                            <td><div class="command"> <h4 class="command_label">/</h4> </div></td>
+
+                                            <td ><input class ="form_input" type="number" min="1" max="32"  ng-model="deviceConfigCtrl.ospfNetwork[i].mask"  required></td>
+
+                                            <td ><input class ="form_input"  ng-model="deviceConfigCtrl.ospfNetwork[i].area.id" required></div></td>
+                                    </tr>   
+                                </div>
+                                </table>
+                                
+                            </fieldset>
+
+                            <fieldset >
+
+                                <div class="command buttongroup" ng-init="deviceConfigCtrl.ospfRfc ='2328'"><h4 class="command_label">Compatible RFC:</h4> 
+                                    <input class ="radio_input" type="radio" name="rfc" value="2328"  ng-model="deviceConfigCtrl.ospfRfc" >
+                                        <h4 class="radio-label">RFC 2328 </h4>
+                                
+                                    <input class ="radio_input" type="radio" name="rfc" value="1583"  ng-model="deviceConfigCtrl.ospfRfc" >
+                                        <h4 class="radio-label">RFC 1583 </h4>
+                        
+                                </div>
+
+                            </fieldset>
+
+                            <fieldset ng-if="deviceConfigCtrl.ospfNetwork.length != '0'">
+
+                            <legend class="legend"><h3>Area Type</h3></legend>
+
+                            
+                                <div ng-repeat="network in deviceConfigCtrl.ospfNetwork | unique:'area.id'">
+                                    <div class="command"><h4 class="command_label">Area:</h4> {{network.area.id}}
+                                    </div>
+                                <br/>
+
+                                    <div class="command buttongroup"><h4 class="command_label">Type:</h4> 
+                                        <div>
+
+                                            <input class ="radio_input" type="radio" name="area-{{network.area.id}}" value="normal"  ng-model="network.area.type">
+                                                <h4 class="radio-label">Normal</h4>
+
+                                            <input class ="radio_input" type="radio" name="area-{{network.area.id}}" value="nssa"  ng-model="network.area.type">
+                                                <h4 class="radio-label">NSSA</h4>
+                                        
+                                            <input class ="radio_input" type="radio" name="area-{{network.area.id}}" value="stub"  ng-model="network.area.type">
+                                                <h4 class="radio-label">Stub</h4>
+
+                                            <input class ="radio_input" type="radio" name="area-{{network.area.id}}" value="stub"  ng-model="network.area.type">
+                                                <h4 class="radio-label">Totally Stub</h4>
+
+                                            <input class ="radio_input" type="radio" name="area-{{network.area.id}}" value="stub"  ng-model="network.area.type">
+                                                <h4 class="radio-label">Totally NSSA</h4>
+                            
+                                    </div>
+                                </div>
+                            </div>
+                                
+
+                                
+                                
+                                
+
+                            </fieldset>
+
+                            <fieldset >
+                            <legend class="legend"><h3>Redistribute</h3></legend>
+
+                                <table>
+                                    <col width="40%">
+                                    <col width="20%">
+                                    <col width="40%">
+ 
+                                    <tr>
+                                        <td align="left">
+                                            <input class ="radio_input" type="checkbox" name="connected" value="connected"  ng-model="deviceConfigCtrl.ospfRedistributeConnected">
+                                            <h4 class="radio-label">Connected</h4>
+
+                                        </td>
+
+                                        <td ng-show="deviceConfigCtrl.ospfRedistributeConnected">
+                                            <h4 class="command_label">Route Map</h4> 
+                                        </td>
+
+                                         <td>
+                                             <div class="command" ng-show="deviceConfigCtrl.ospfRedistributeConnected"><input class ="form_input" ng-model="deviceConfigCtrl.ospfRedistributeConnectedRouteMap" ></div>     
+                                            
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left">
+                                            <input class ="radio_input" type="checkbox" name="static" value="static"  ng-model="deviceConfigCtrl.ospfRedistributeStatic" >
+                                            <h4 class="radio-label">Static</h4>
+
+                                        </td>
+
+                                        <td ng-show="deviceConfigCtrl.ospfRedistributeStatic">
+                                            <h4 class="command_label">Route Map</h4> 
+                                        </td>
+
+                                        <td>
+                                              <div class="command" ng-show="deviceConfigCtrl.ospfRedistributeStatic"> 
+                                              <input class ="form_input" ng-model="deviceConfigCtrl.ospfRedistributeStaticRouteMap" ></div>     
+
+                                            
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td align="left">
+                                            <input class ="radio_input" type="checkbox" name="isis" value="isis"  ng-model="deviceConfigCtrl.ospfRedistributeISIS" >
+                                            <h4 class="radio-label">ISIS</h4>
+
+                                        </td>
+
+                                        <td ng-show="deviceConfigCtrl.ospfRedistributeISIS">
+                                            <h4 class="command_label">Route Map</h4> 
+                                        </td>
+
+                                        <td>
+                                             <div class="command" ng-show="deviceConfigCtrl.ospfRedistributeISIS">
+                                             <input class ="form_input" ng-model="deviceConfigCtrl.ospfRedistributeISISRouteMap" ></div> 
+                                            
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td align="left">
+                                            <input class ="radio_input" type="checkbox" name="bgp" value="bgp"  ng-model="deviceConfigCtrl.ospfRedistributeBGP" >
+                                            <h4 class="radio-label">BGP</h4>
+
+                                        </td>
+
+                                        <td ng-show="deviceConfigCtrl.ospfRedistributeBGP">
+                                            <h4 class="command_label">Route Map</h4> 
+                                        </td>
+
+                                        <td>
+                                             <div class="command" ng-show="deviceConfigCtrl.ospfRedistributeBGP">
+                                             <input class ="form_input" ng-model="deviceConfigCtrl.ospfRedistributeBGPRouteMap" ></div>     
+
+                                            
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left">
+                                             <input class ="radio_input" type="checkbox" name="rip" value="rip"  ng-model="deviceConfigCtrl.ospfRedistributeRIP" >
+                                             <h4 class="radio-label">RIP</h4>
+
+                                        </td>
+                                        
+                                        <td ng-show="deviceConfigCtrl.ospfRedistributeRIP">
+                                            <h4 class="command_label">Route Map</h4> 
+                                        </td>
+
+                                        <td>
+                                               <div class="command" ng-show="deviceConfigCtrl.ospfRedistributeRIP">
+                                               <input class ="form_input" ng-model="deviceConfigCtrl.ospfRedistributeRIPRouteMap" ></div> 
+                                            
+                                        </td>
+                                    </tr>
+
+                                </table>
+
+                            </fieldset>
+
+                       </fieldset> 
+
+                        <input type="submit" name="Save" class="save-butn" value="Save">
+                    </form>  
+                </div>      
+            </div>
+
+            <!-- BGP -->
+
+            <div class="center-wrapper" ng-show="deviceConfigCtrl.subTab === 'bgp'">
+                <div class="center-content">
+                    <form name="bgpConfigForm" ng-submit="deviceConfigCtrl.pushConfig('bgp')">
+                       <fieldset class="config_field">
+                            <legend class="legend"><h2>BGP Configurations</h2></legend>
+                            <fieldset >
+                            <table cellpadding="4%" align="center">
+                                <tr>
+                                    <td>
+                                        <div class="command"><h4 class="command_label">Instance:</h4></div>
+                                    </td>
+                                    <td>
+                                        <input class ="form_input" type="number" min="1"  ng-model="deviceConfigCtrl.bgpInstance" value="1" required>
+                                    </td>
+                                    <td>
+                                        <div><input class ="radio_input" type="checkbox"   ng-model="deviceConfigCtrl.bgpShut" ></div>
+                                    </td>
+                                    <td>
+                                        <h4 class="radio-label">Shutdown</h4> 
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="command"><h4 class="command_label">Router Id:</h4></div>
+                                    </td>
+                                    <td>
+                                         <input class ="form_input" ng-model="deviceConfigCtrl.bgpRouterId" >
+                                    </td>
+                                </tr>
+                            </table>
+        
+
+                            </fieldset>
+
+                            <fieldset >
+
+                                <legend class="legend"><h3>Neighbors</h3></legend>
+
+                                <table cellpadding="4%" align="center">
+                                    <tr>
+                                        <td><div class="command"><h4 class="command_label">Number of neighbors:</h4> </div></td>
+                                        <td><input type="number" min ="0" class ="form_input"   ng-model="deviceConfigCtrl.bgpNumNeighbors" required></td>
+                                    </tr>
+                                </table>
+
+                                <div ng-repeat="i in deviceConfigCtrl.getNumber(deviceConfigCtrl.bgpNumNeighbors)" >
+                                   
+                                        <fieldset>
+
+                                        <table cellpadding="4%" align="center">
+
+                                            <tr>
+                                                <th>
+                                                    <div class="command">
+                                                        <h4 class="command_label">Neighbor</h4>
+                                                    </div>
+                                                </th>
+                                                <th>
+                                                    <div class="command"> 
+                                                        <h4 class="command_label">Remote AS</h4>
+                                                    </div>
+                                                </th>
+                                                <th ng-show="deviceConfigCtrl.bgpNeighbor[i].updateSource">
+                                                    <div class="command"> 
+                                                        <h4 class="command_label">Update Source Interface</h4>
+                                                    </div>
+                                                </th>
+                                                <th ng-show="deviceConfigCtrl.bgpNeighbor[i].ebgpMultihop">
+                                                    <div class="command">
+                                                        <h4 class="command_label">Hop Count</h4>
+                                                    </div>
+                                                </th>
+                                                <th colspan="2" ng-show="deviceConfigCtrl.bgpNeighbor[i].routeMap">
+                                                     <div class="command">
+                                                        <h4 class="command_label">Route Map</h4>
+                                                    </div>
+                                                </th>
+                                            </tr>
+
+                                            <tr>
+
+                                            <td> <input class ="form_input" ng-model="deviceConfigCtrl.bgpNeighbor[i].neighbor" required></td>
+
+                                            <td> <input class ="form_input" type="number" min="1" max="4294967295."  ng-model="deviceConfigCtrl.bgpNeighbor[i].remoteAS"  required></td>
+
+                                             <td ng-show="deviceConfigCtrl.bgpNeighbor[i].updateSource">
+                                                <input class ="form_input"  ng-model="deviceConfigCtrl.bgpNeighbor[i].updateSourceInterface"  required>
+                                            </td>
+
+                                            <td ng-show="deviceConfigCtrl.bgpNeighbor[i].ebgpMultihop">
+                                                 <input class ="form_input" type="number" min="1" max="255" ng-model="deviceConfigCtrl.bgpNeighbor[i].ebgpHopCount"  required>
+                                            </td>
+
+                                            <td ng-show="deviceConfigCtrl.bgpNeighbor[i].routeMap">
+                                                <input class ="form_input"  ng-model="deviceConfigCtrl.bgpNeighbor[i].routeMapName"  required>
+
+                                            </td >
+                                            <td ng-show="deviceConfigCtrl.bgpNeighbor[i].routeMap">
+                                                <select name="direction" ng-model="deviceConfigCtrl.bgpNeighbor[i].routeMapDirection">
+                                                    <option value="in">In</option>
+                                                    <option value="out">Out</option>
+                                                </select>
+
+                                            </td>
+                                            </tr>
+                                        </table cellpadding="4%" align="center">
+                                        <table>
+                                            <tr>
+
+                                           <td> <div class="options" align="right"><input class ="radio_input " type="checkbox" ng-model="deviceConfigCtrl.bgpNeighbor[i].nextHopSelf"></div></td>
+                                            <td><h4 class="radio-label ">Next Hop Self</h4></td>
+
+                                            <td><div class="options" align="right"><input class ="radio_input " type="checkbox"ng-model="deviceConfigCtrl.bgpNeighbor[i].updateSource"></div></td>
+                                            <td><h4 class="radio-label ">Update Source</h4></td>
+
+
+                                            <td><div class="options" align="right"><input class ="radio_input " type="checkbox" ng-model="deviceConfigCtrl.bgpNeighbor[i].ebgpMultihop"></div></td>
+                                            <td><h4 class="radio-label ">EBGP Multihop</h4></td>
+
+                                            <td><div class="options" align="right"><input class ="radio_input " type="checkbox" ng-model="deviceConfigCtrl.bgpNeighbor[i].routeMap"></div></td>
+                                            <td><h4 class="radio-label ">Route Map</h4></td>
+                                        </tr>
+
+                                        </table>
+                                            
+                                        </fieldset>
+                                        
+                                </div>
+                                
+                            </fieldset>
+
+                            <fieldset >
+
+                                <legend class="legend"><h3>Networks</h3></legend>
+
+                                <table cellpadding="4%" align="center">
+                                    <tr>
+                                        <td>
+                                            <div class="command"><h4 class="command_label">Number of networks:</h4></div>
+                                        </td>
+                                        <td>
+                                            <input type="number" min ="0" class ="form_input"   ng-model="deviceConfigCtrl.bgpNumNetworks" required>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table ng-show="deviceConfigCtrl.bgpNumNetworks" cellpadding="4%" align="center">
+                                
+                                <tr>
+                                    <th colspan="3">Network</th>
+                                    <th>Route Map</th>
+                                </tr>
+
+                                <tr ng-repeat="i in deviceConfigCtrl.getNumber(deviceConfigCtrl.bgpNumNetworks)" >
+                                    
+                                            <td><input class ="form_input" ng-model="deviceConfigCtrl.bgpNetwork[i].network" required></td>
+
+                                            <td><div class="command"> <h4 class="command_label">/</h4> </div></td>
+
+                                            <td ><input class ="form_input" type="number" min="1" max="32"  ng-model="deviceConfigCtrl.bgpNetwork[i].mask"  required></td>
+
+                                            <td ><input class ="form_input"  ng-model="deviceConfigCtrl.bgpNetwork[i].routemap" ></div></td>
+                                    </tr>   
+                                </div>
+                                </table>
+                                
+                            </fieldset>
+
+                            <fieldset >
+                            <legend class="legend"><h3>Redistribute</h3></legend>
+
+                                <table>
+                                    <col width="40%">
+                                    <col width="20%">
+                                    <col width="40%">
+ 
+                                    <tr>
+                                        <td align="left">
+                                            <input class ="radio_input" type="checkbox" name="connected" value="connected"  ng-model="deviceConfigCtrl.bgpRedistributeConnected">
+                                            <h4 class="radio-label">Connected</h4>
+
+                                        </td>
+
+                                        <td ng-show="deviceConfigCtrl.bgpRedistributeConnected">
+                                            <h4 class="command_label">Route Map</h4> 
+                                        </td>
+
+                                         <td>
+                                             <div class="command" ng-show="deviceConfigCtrl.bgpRedistributeConnected"><input class ="form_input" ng-model="deviceConfigCtrl.bgpRedistributeConnectedRouteMap" ></div>     
+                                            
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left">
+                                            <input class ="radio_input" type="checkbox" name="static" value="static"  ng-model="deviceConfigCtrl.bgpRedistributeStatic" >
+                                            <h4 class="radio-label">Static</h4>
+
+                                        </td>
+
+                                        <td ng-show="deviceConfigCtrl.bgpRedistributeStatic">
+                                            <h4 class="command_label">Route Map</h4> 
+                                        </td>
+
+                                        <td>
+                                              <div class="command" ng-show="deviceConfigCtrl.bgpRedistributeStatic"> 
+                                              <input class ="form_input" ng-model="deviceConfigCtrl.bgpRedistributeStaticRouteMap" ></div>     
+
+                                            
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td align="left">
+                                            <input class ="radio_input" type="checkbox" name="isis" value="isis"  ng-model="deviceConfigCtrl.bgpRedistributeISIS" >
+                                            <h4 class="radio-label">ISIS</h4>
+
+                                        </td>
+
+                                        <td ng-show="deviceConfigCtrl.bgpRedistributeISIS">
+                                            <h4 class="command_label">Route Map</h4> 
+                                        </td>
+
+                                        <td>
+                                             <div class="command" ng-show="deviceConfigCtrl.bgpRedistributeISIS">
+                                             <input class ="form_input" ng-model="deviceConfigCtrl.bgpRedistributeISISRouteMap" ></div> 
+                                            
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td align="left">
+                                            <input class ="radio_input" type="checkbox" name="bgp" value="bgp"  ng-model="deviceConfigCtrl.bgpRedistributeOSPF" >
+                                            <h4 class="radio-label">OSPF</h4>
+
+                                        </td>
+
+                                        <td ng-show="deviceConfigCtrl.bgpRedistributeOSPF">
+                                            <h4 class="command_label">Route Map</h4> 
+                                        </td>
+
+                                        <td>
+                                             <div class="command" ng-show="deviceConfigCtrl.bgpRedistributeOSPF">
+                                             <input class ="form_input" ng-model="deviceConfigCtrl.bgpRedistributeOSPFRouteMap" ></div>     
+
+                                            
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left">
+                                             <input class ="radio_input" type="checkbox" name="rip" value="rip"  ng-model="deviceConfigCtrl.bgpRedistributeRIP" >
+                                             <h4 class="radio-label">RIP</h4>
+
+                                        </td>
+                                        
+                                        <td ng-show="deviceConfigCtrl.bgpRedistributeRIP">
+                                            <h4 class="command_label">Route Map</h4> 
+                                        </td>
+
+                                        <td>
+                                               <div class="command" ng-show="deviceConfigCtrl.bgpRedistributeRIP">
+                                               <input class ="form_input" ng-model="deviceConfigCtrl.bgpRedistributeRIPRouteMap" ></div> 
+                                            
+                                        </td>
+                                    </tr>
+
+                                </table>
+
+                            </fieldset>
+
+                       </fieldset> 
+
+                        <input type="submit" name="Save" class="save-butn" value="Save">
+                    </form>  
+                </div>      
+            </div>
+         </div>
+
+         <!-- VXLAN -->
+         <div class="tab-content" ng-show="deviceConfigCtrl.tab === 'vxlan'">
+            <div class="center-wrapper">
+                <div class="center-content">
+                    <form name="vxlanForm" ng-submit="deviceConfigCtrl.pushConfig('vxlan')">
+                        <fieldset class="config_field">
+                            <legend class="legend"><h2>VXLAN Configurations</h2></legend>
+                            <fieldset >
+
+                                <div class="command"><h4 class="command_label">Loopback:</h4> <input class ="form_input" type="number" min="1"  ng-model="deviceConfigCtrl.vxlanLoopback" value="1" required></div>
+
+
+                                  <div class="command"><h4 class="command_label">UDP port:</h4> <input class ="form_input" type="number" min=1024 max=65535 ng-value="{{deviceConfigCtrl.vxlanUdpPort}}" ng-model="deviceConfigCtrl.vxlanUdpPort" ></div>
+
+                            </fieldset>
+
+                             <fieldset >
+
+                                 <legend class="legend"><h3>VLAN-VNI Mapping</h3></legend>
+
+                                <div class="command"><h4 class="command_label">Number of mappings:</h4> <input type="number" min ="0" class ="form_input"   ng-model="deviceConfigCtrl.vxlanNumMappings" required></div>
+                                <div class="vlan-vni-table">
+                                <table ng-show="deviceConfigCtrl.vxlanNumMappings" align="center" cellpadding="4%">
+
+                                    <tr>
+                                        <th>
+                                             <div class="command"><h4 class="command_label">VLAN</h4> </div>
+                                        </th>
+                                        <th>
+                                             <div class="command"> <h4 class="command_label">VNI</h4></div>  
+                                        </th>
+
+                                    </tr>
+
+                                    <tr ng-repeat="i in deviceConfigCtrl.getNumber(deviceConfigCtrl.vxlanNumMappings)" >
+                                   
+                                        <td> <input class ="form_input" type="number" min="1" max="4094" ng-model="deviceConfigCtrl.vxlanMapping[i].vlan" required></td>
+
+                                        <td><input class ="form_input" type="number" min="1" max="16777215" ng-model="deviceConfigCtrl.vxlanMapping[i].vni"  required></td>
+                                    
+                                </tr>
+                                    
+                                </table>
+                                </div>
+                                
+                            </fieldset>
+
+                            <fieldset>
+
+                                 <div class="command buttongroup">
+
+                                    <input class ="radio_input" type="checkbox" name="common_flood" value="common_flood"  ng-model="deviceConfigCtrl.vxlanFloodListCheck">
+                                        <h4 class="radio-label">Common Flood List:</h4>
+                                    <input class ="radio_input" type="checkbox" name="vlan_flood" value="vlan_flood"  ng-model="deviceConfigCtrl.vxlanVLANFloodListCheck">
+                                        <h4 class="radio-label">VLAN-specific Flood List:</h4>
+                        
+                                </div>
+                                
+                            </fieldset>
+
+                             <fieldset ng-show="deviceConfigCtrl.vxlanFloodListCheck">
+
+                                 <legend class="legend"><h3>Flood List</h3></legend>
+
+                                <div class="command"><h4 class="command_label">Number of VTEPs:</h4> <input type="number" min ="0" class ="form_input"   ng-model="deviceConfigCtrl.vxlanNumVTEP" required></div>
+
+
+                                <div ng-repeat="i in deviceConfigCtrl.getNumber(deviceConfigCtrl.vxlanNumVTEP)" >
+                                   
+                                        <div class="command"><h4 class="command_label">Remote VTEP IP:</h4> <input class ="form_input" g-model="deviceConfigCtrl.vxlanFloodList[i]" required></div>     
+                                    
+                                </div>
+                                
+                            </fieldset>
+
+                            <fieldset ng-show="deviceConfigCtrl.vxlanVLANFloodListCheck">
+
+                                 <legend class="legend"><h3>VLAN-specific Flood List</h3></legend>
+
+                                  <div class="command"><h4 class="command_label">Number of VLANs:</h4> <input type="number" min ="0" class ="form_input"   ng-model="deviceConfigCtrl.vxlanNumVLANFloodList" required></div>
+
+                                  <div ng-repeat="i in deviceConfigCtrl.getNumber(deviceConfigCtrl.vxlanNumVLANFloodList)" >
+
+                                         <div class="command"><h4 class="command_label">VLAN:</h4> <input class ="form_input" type="number" min="1" max="4094" ng-model="deviceConfigCtrl.vxlanVLANFloodList[i].vlan" required></div>
+                                   
+                                         <div class="command"><h4 class="command_label">Number of VTEPs:</h4> <input type="number" min ="0" class ="form_input"   ng-model="deviceConfigCtrl.vxlanVLANFloodList[i].numVTEP" required></div>
+
+                                          <div ng-repeat="j in deviceConfigCtrl.getNumber(deviceConfigCtrl.vxlanVLANFloodList[i].numVTEP)" >
+
+                                                 <div class="command"><h4 class="command_label">Remote VTEP IP:</h4> <input class ="form_input" g-model="deviceConfigCtrl.vxlanVLANFloodList[j].floodlist" required></div>   
+
+                                          </div>
+
+                                  </div>
+                                
+                            </fieldset>
+
+                       </fieldset> 
+                    </form>  
+                </div>      
+            </div>
+
+        </div>
+
+        <!-- Interface -->
+         <div class="tab-content" ng-show="deviceConfigCtrl.tab === 'interface'">
+            <section class="tab-pane table-data">
+                <div class="builder-tabview tabs-left clearfix">
+                <ul class="sub-nav sub-nav-tabs" role="tablist" set-builder-tab-height="" style="height: 1000px; ">
+                    <li ng-class="{'active' : deviceConfigCtrl.subTab === 'ethernet'}">
+                        <div ng-click="deviceConfigCtrl.setSubTab('ethernet')">Ethernet</div>
+                    </li>
+                    <li ng-class="{'active' : deviceConfigCtrl.subTab === 'loopback'}">
+                        <div ng-click="deviceConfigCtrl.setSubTab('loopback')">Loopback</div>
+                    </li>
+                    <li ng-class="{'active' : deviceConfigCtrl.subTab === 'port-channel'}">
+                        <div ng-click="deviceConfigCtrl.setSubTab('port-channel')">Port-Channel</div>
+                    </li>
+                    <li ng-class="{'active' : deviceConfigCtrl.subTab === 'vlan'}">
+                        <div ng-click="deviceConfigCtrl.setSubTab('vlan')">VLAN</div>
+                    </li>
+                    
+                </ul>
+                </div>
+
+                <div class="center-wrapper" ng-show="deviceConfigCtrl.subTab === 'ethernet'">
+                    <div class="center-content">
+                        <form name="ethernetConfigForm" ng-submit="deviceConfigCtrl.pushConfig('ethernet')">
+                            <fieldset>
+                            <legend class="legend"><h2>Ethernet Configuration</h2></legend>
+
+                            <table cellpadding="4%" align="center">
+                                <tr>
+                                    <td>
+                                        <div class="command"><h4 class="command_label">Port Number:</h4></div>
+                                    </td>
+
+                                    <td>
+                                        <input class ="form_input" ng-model="deviceConfigCtrl.interfaceEthernetPort" required>
+                                    </td>
+
+                                    <td><div class="options" align="right"><input class ="radio_input " type="checkbox" ng-model="deviceConfigCtrl.interfaceEthernetShutdown"></div></td>
+                                    
+                                    <td><h4 class="radio-label "> Shutdown</h4></td>
+                             
+                                </tr>
+                            </table>
+                                
+                            <table cellpadding="4%" align="center">
+                                        <tr>
+                                            <td><div class="options" align="right"><input class ="radio_input " type="checkbox" ng-model="deviceConfigCtrl.interfaceEthernetSwitchport" ng-checked="true"></div></td>
+                                            <td><h4 class="radio-label "> Switchport</h4></td>
+                                        </tr>                    
+
+                            </table>
+                            
+                            <table ng-hide="deviceConfigCtrl.interfaceEthernetSwitchport" cellpadding="4%" align="center">
+                                <tr >
+                                    
+                                            <td><div class="command"> <h4 class="command_label">IP Address</h4> </div></td>
+
+                                            <td><input class ="form_input" ng-model="deviceConfigCtrl.interfaceEthernetIPAddress" required></td>
+
+                                            <td><div class="command"> <h4 class="command_label">/</h4> </div></td>
+
+                                            <td ><input class ="form_input" type="number" min="1" max="32"  ng-model="deviceConfigCtrl.interfaceEthernetNetmask"  required></td>
+
+                                    </tr>   
+                                </div>
+                            </table>
+
+                            <table ng-show="deviceConfigCtrl.interfaceEthernetSwitchport" cellpadding="4%" align="center">
+                                <tr >
+                                    
+                                            <td><div class="command"> <h4 class="command_label">Mode</h4> </div></td>
+
+                                            <td>
+                                                <select name="direction" ng-model="deviceConfigCtrl.interfaceEthernetSwitchportMode">
+                                                    <option value="trunk">Trunk</option>
+                                                    <option value="access">Access</option>
+                                                </select>
+                                            </td>
+
+                                    </tr>   
+                                </div>
+                            </table>
+
+                            <table ng-show="deviceConfigCtrl.interfaceEthernetSwitchportMode == 'trunk'" cellpadding="4%" align="center">
+                                <tr >
+                                    
+                                            <td><div class="command"> <h4 class="command_label">Allowed VLAN</h4> </div></td>
+
+                                            <td>
+                                               <input class ="form_input" ng-model="deviceConfigCtrl.interfaceEthernetTrunkAllowedVLAN" placeholder="Enter a VLAN number or a range" >
+                                            </td>
+                                    </tr>   
+                                </div>
+                            </table>
+
+                            <table ng-show="deviceConfigCtrl.interfaceEthernetSwitchportMode == 'access'" cellpadding="4%" align="center">
+                                <tr >
+                                    
+                                            <td><div class="command"> <h4 class="command_label">VLAN</h4> </div></td>
+
+                                            <td>
+                                               <input class ="form_input" ng-model="deviceConfigCtrl.interfaceEthernetAccessVLAN" type="number" min="1" max="4094" >
+                                            </td>
+
+                                    </tr>   
+                                </div>
+                            </table>
+                                
+
+                            </fieldset>
+                            <input type="submit" name="Save" class="save-butn" value="Save">
+                        </form>  
+                    </div>      
+                </div>
+
+                 <div class="center-wrapper" ng-show="deviceConfigCtrl.subTab === 'loopback'">
+                    <div class="center-content">
+                        <form name="loopbackConfigForm" ng-submit="deviceConfigCtrl.pushConfig('loopback')">
+                            <fieldset>
+                            <legend class="legend"><h2>Loopback Configuration</h2></legend>
+
+                            <table cellpadding="4%" align="center">
+                                <tr>
+                                    <td>
+                                        <div class="command"><h4 class="command_label">Loopback Number:</h4></div>
+                                    </td>
+
+                                    <td>
+                                        <input class ="form_input" type="number" min="0" max="1000" ng-model="deviceConfigCtrl.interfaceLoopbackNum" required>
+                                    </td>
+
+                                    <td><div class="options" align="right"><input class ="radio_input " type="checkbox" ng-model="deviceConfigCtrl.interfaceLoopbackShutdown"></div></td>
+                                    
+                                    <td><h4 class="radio-label "> Shutdown</h4></td>
+                             
+                                </tr>
+                            </table>
+                            <table cellpadding="4%" align="center">
+                                <tr >
+                                    
+                                            <td><div class="command"> <h4 class="command_label">IP Address</h4> </div></td>
+
+                                            <td><input class ="form_input" ng-model="deviceConfigCtrl.interfaceLoopbackIPAddress" required></td>
+
+                                            <td><div class="command"> <h4 class="command_label">/</h4> </div></td>
+
+                                            <td ><input class ="form_input" type="number" min="1" max="32"  ng-model="deviceConfigCtrl.interfaceLoopbackNetmask"  required></td>
+
+                                    </tr>   
+                                </div>
+                            </table>
+                            </fieldset>
+                            <input type="submit" name="Save" class="save-butn" value="Save">
+                        </form>  
+                    </div>      
+                </div>
+
+                <div class="center-wrapper" ng-show="deviceConfigCtrl.subTab === 'port-channel'">
+                    <div class="center-content">
+                        <form name="port-channelConfigForm" ng-submit="deviceConfigCtrl.pushConfig('port-channel')">
+                            <fieldset>
+                            <legend class="legend"><h2>Port-Channel Configuration</h2></legend>
+                            <table cellpadding="4%" align="center">
+                                <tr>
+                                    <td>
+                                        <div class="command"><h4 class="command_label">Port-Channel Number:</h4></div>
+                                    </td>
+
+                                    <td>
+                                        <input class ="form_input" type="number" min="1" max="2000" ng-model="deviceConfigCtrl.interfacePortChannelNum" required>
+                                    </td>
+
+                                    <td><div class="options" align="right"><input class ="radio_input " type="checkbox" ng-model="deviceConfigCtrl.interfacePortChannelShutdown"></div></td>
+                                    
+                                    <td><h4 class="radio-label "> Shutdown</h4></td>
+                             
+                                </tr>
+                            </table>
+
+                            
+
+                             <table cellpadding="4%" align="center">
+                                        <tr>
+                                            <td><div class="options" align="right"><input class ="radio_input " type="checkbox" ng-model="deviceConfigCtrl.interfacePortChannelSwitchport" ng-checked="true"></div></td>
+                                            <td><h4 class="radio-label "> Switchport</h4></td>
+                                        </tr>                    
+
+                            </table>
+                            
+                            <table ng-hide="deviceConfigCtrl.interfacePortChannelSwitchport" cellpadding="4%" align="center">
+                                <tr >
+                                    
+                                            <td><div class="command"> <h4 class="command_label">IP Address</h4> </div></td>
+
+                                            <td><input class ="form_input" ng-model="deviceConfigCtrl.interfacePortChannelIPAddress" required></td>
+
+                                            <td><div class="command"> <h4 class="command_label">/</h4> </div></td>
+
+                                            <td ><input class ="form_input" type="number" min="1" max="32"  ng-model="deviceConfigCtrl.interfacePortChannelNetmask"  required></td>
+
+                                    </tr>   
+                                </div>
+                            </table>
+
+                            <table ng-show="deviceConfigCtrl.interfacePortChannelSwitchport" cellpadding="4%" align="center">
+                                <tr >
+                                    
+                                            <td><div class="command"> <h4 class="command_label">Mode</h4> </div></td>
+
+                                            <td>
+                                                <select name="direction" ng-model="deviceConfigCtrl.interfacePortChannelSwitchportMode">
+                                                    <option value="trunk">Trunk</option>
+                                                    <option value="access">Access</option>
+                                                </select>
+                                            </td>
+
+                                    </tr>   
+                                </div>
+                            </table>
+
+                            <table ng-show="deviceConfigCtrl.interfacePortChannelSwitchportMode == 'trunk'" cellpadding="4%" align="center">
+                                <tr >
+                                    
+                                            <td><div class="command"> <h4 class="command_label">Allowed VLAN</h4> </div></td>
+
+                                            <td>
+                                               <input class ="form_input" ng-model="deviceConfigCtrl.interfacePortChannelTrunkAllowedVLAN" placeholder="Enter a VLAN number or a range" >
+                                            </td>
+                                    </tr>   
+                                </div>
+                            </table>
+
+                            <table ng-show="deviceConfigCtrl.interfacePortChannelSwitchportMode == 'access'" cellpadding="4%" align="center">
+                                <tr >
+                                    
+                                            <td><div class="command"> <h4 class="command_label">VLAN</h4> </div></td>
+
+                                            <td>
+                                               <input class ="form_input" ng-model="deviceConfigCtrl.interfacePortChannelAccessVLAN" type="number" min="1" max="4094" >
+                                            </td>
+
+                                    </tr>   
+                                </div>
+                            </table>
+                           
+                                
+                            </fieldset>
+                            <input type="submit" name="Save" class="save-butn" value="Save">
+                        </form>  
+                    </div>      
+                </div>
+
+                <div class="center-wrapper" ng-show="deviceConfigCtrl.subTab === 'vlan'">
+                    <div class="center-content">
+                        <form name="vlanConfigForm" ng-submit="deviceConfigCtrl.pushConfig('vlan')">
+                            <fieldset>
+                            <legend class="legend"><h2>VLAN Configuration</h2></legend>
+                            <table cellpadding="4%" align="center">
+                                <tr>
+                                    <td>
+                                        <div class="command"><h4 class="command_label">VLAN Number:</h4></div>
+                                    </td>
+
+                                    <td>
+                                        <input class ="form_input" type="number" min="1" max="4094" ng-model="deviceConfigCtrl.interfaceVLANNum" required>
+                                    </td>
+
+                                    <td><div class="options" align="right"><input class ="radio_input " type="checkbox" ng-model="deviceConfigCtrl.interfaceVLANShutdown"></div></td>
+                                    
+                                    <td><h4 class="radio-label "> Shutdown</h4></td>
+                             
+                                </tr>
+                            </table>
+
+                            <table cellpadding="4%" align="center">
+                                <tr >
+                                    
+                                            <td><div class="command"> <h4 class="command_label">IP Address</h4> </div></td>
+
+                                            <td><input class ="form_input" ng-model="deviceConfigCtrl.interfaceVLANIPAddress" required></td>
+
+                                            <td><div class="command"> <h4 class="command_label">/</h4> </div></td>
+
+                                            <td ><input class ="form_input" type="number" min="1" max="32"  ng-model="deviceConfigCtrl.interfaceVLANNetmask"  required></td>
+
+                                    </tr>   
+                                </div>
+                            </table>
+
+
+                            </fieldset>
+                            <input type="submit" name="Save" class="save-butn" value="Save">
+                        </form>  
+                    </div>      
+                </div>
+
+            </section>
+        </div>
+
+        <!-- Route Map -->
+
+         <div class="tab-content" ng-show="deviceConfigCtrl.tab === 'routeMap'">
+            <div class="center-wrapper">
+                <div class="center-content">
+                    <form name="routeMapForm" ng-submit="deviceConfigCtrl.pushConfig('routeMap')">
+                        <fieldset class="config_field">
+                            <legend class="legend"><h2>Route Map</h2></legend>
+
+                             <fieldset >
+
+                                <div class="command"><h4 class="command_label">Name:</h4> <input class ="form_input" ng-model="deviceConfigCtrl.routeMapName" required></div>
+                            
+                            </fieldset>
+
+                            <fieldset >
+                                <legend class="legend"><h3>Match</h3></legend>
+                        
+                                  <input class ="radio_input" type="checkbox" name="static" value="static"  ng-model="deviceConfigCtrl.routeMapBGPCheck" >
+                                        <h4 class="radio-label">BGP</h4>                                
+
+                                <fieldset ng-show="deviceConfigCtrl.routeMapBGPCheck">
+                                
+                                    <legend class="legend"><h4>BGP</h4></legend>
+                                    <div class="command"><h4 class="command_label">AS:</h4> <input type="number" min ="1" max="4294967295" class ="form_input"   ng-model="deviceConfigCtrl.routeMapAS" required></div>
+
+                                    <div class="command"><h4 class="command_label">AS Path:</h4> <input class ="form_input"   ng-model="deviceConfigCtrl.routeMapASPath" required></div>
+
+                                    <div class="command"><h4 class="command_label">Local Preference:</h4> <input class ="form_input"   ng-model="deviceConfigCtrl.routeMapLocalPref" required></div>
+
+                                </fieldset>
+
+
+                            </fieldset>
+                             <fieldset >
+
+                                 <legend class="legend"><h3>Set</h3></legend>
+
+                                 
+                            </fieldset>
+                            
+                            </fieldset>
+
+                            
+
+
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>

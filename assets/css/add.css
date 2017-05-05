@@ -1,0 +1,83 @@
+element.style {
+    display: block;
+    position: absolute;
+    left: 800px;
+    top: 193px;
+}
+
+.menu-box {
+    background: #fff;
+    border-color: #aaa;
+    box-shadow: 2px 3px 3px #aaa;
+    position: absolute;
+    left: 6%;
+    border: 1px solid;
+    z-index: 999;
+    top: 11%;
+}
+
+/**/
+
+.menu-box ul {
+    padding: 0;
+    margin-bottom: 0;
+}
+
+ul, li {
+    color: #666;
+}
+
+ul, li {
+    text-decoration: none;
+    list-style: none;
+    padding: 2px;
+}
+
+ul, ol {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+/**/
+
+.menu-box li {
+    border-bottom-color: #002859;
+    color: #00316c;
+}
+
+.menu-box li {
+    list-style: none;
+    border-bottom: 1px dotted;
+    padding: 6px 8px;
+    position: relative;
+    font-size: 14px;
+    cursor: pointer;
+    text-transform: capitalize;
+    min-width: 112px;
+}
+
+ul, li {
+    color: #666;
+}
+
+ul, li {
+    text-decoration: none;
+    list-style: none;
+    padding: 2px;
+}
+
+*, *:before, *:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+user agent stylesheet
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+.form-error-message {
+    color: red;
+    font-style: italic;
+}

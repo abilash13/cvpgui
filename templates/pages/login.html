@@ -1,0 +1,36 @@
+<link rel="stylesheet" type="text/css" href="assets/css/login.css" />
+<div class="login-page">
+
+      <div id="error" class="animateNotifications message">
+          <span class="icon glyphicon glyphicon-circle-arrow-down"></span>
+          <span class="errorMessage">{{errorMessage}}</span>
+          <span class="close-message add-button glyphicon glyphicon-remove" "></span>
+      </div>
+
+      <div class="login-content main-content-wrap">
+        <div class="login-logo"></div>        
+         <div class="login-box">
+            <form method="post" name="loginForm" ng-submit="loginForm.$valid && loginCtrl.login()" novalidate>
+               <h2>LOGIN</h2>
+               <div class="login-fields">
+                  <input class="placeholder-color" type="text" name="username" title="Username" placeholder="Username" ng-model="loginCtrl.username" required>
+                  <input class="placeholder-color" type="password" name="password" title="Password" placeholder="Password" ng-model="loginCtrl.password" required>
+                  <input class="login-submit" type="submit" value="LOGIN" ng-disabled="loginForm.$invalid">
+               </div>
+            </form>
+         </div>
+      </div>
+</div>
+<footer>
+         <div static-include="resources/template/common/footer.tpl.html">
+   <div class="footer-part ng-scope" ng-click="hideLogoutBox()">
+       <p>© <span ng-bind="date" class="ng-binding">2017</span>
+       <span data-translate="COPYRIGHT_INFO">Arista Networks, Inc. All rights reserved.</span>     
+       </p>
+   </div>
+</div>
+</footer>
+
+
+
+
